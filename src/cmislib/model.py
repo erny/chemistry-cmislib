@@ -1872,9 +1872,12 @@ class CmisObject(object):
                     else:
                         propertyValue = []
                         for valNode in valNodeList:
-                            propertyValue.append(parsePropValue(valNode.
+                            try:
+                                propertyValue.append(parsePropValue(valNode.
                                                        childNodes[0].data,
                                                        node.localName))
+                            except IndexError:
+                                pass
                 else:
                     propertyValue = None
                 self._properties[propertyName] = propertyValue
